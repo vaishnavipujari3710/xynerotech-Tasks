@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Home Cleaning</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-center text-green-600">Book Home Cleaning Service</h2>
+
+    <form action="submit_booking.php" method="POST" class="space-y-4">
+      <div>
+        <label for="fullname" class="block font-medium mb-1">Full Name</label>
+        <input type="text" name="fullname" id="fullname" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+
+      <div>
+        <label for="email" class="block font-medium mb-1">Email</label>
+        <input type="email" name="email" id="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+
+      <div>
+        <label for="phone" class="block font-medium mb-1">Phone Number</label>
+        <input type="tel" name="phone" id="phone" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+
+      <div>
+        <label for="address" class="block font-medium mb-1">Full Address</label>
+        <textarea name="address" id="address" required rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+      </div>
+
+      <div>
+        <label for="service" class="block font-medium mb-1">Service Type</label>
+        <select name="service" id="service" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+          <option value="" disabled selected>Select Service</option>
+          <option value="Basic Cleaning">Basic Cleaning</option>
+          <option value="Deep Cleaning">Deep Cleaning</option>
+          <option value="Kitchen Cleaning">Kitchen Cleaning</option>
+          <option value="Bathroom & Toilet Cleaning">Bathroom & Toilet Cleaning</option>
+		  <option value="AC Repair & Maintenance">AC Repair & Maintenance</option>
+          <option value="Electrical Appliances Repair & Maintenance">Electrical Appliances Repair & Maintenance</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="date" class="block font-medium mb-1">Preferred Date</label>
+        <input type="date" name="date" id="date" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+
+      <div>
+        <label for="time" class="block font-medium mb-1">Preferred Time</label>
+        <input type="time" name="time" id="time" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg">
+          Book Now
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
