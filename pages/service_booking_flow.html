@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Your Service - ServiceHub</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="description" content="Book trusted home service professionals with transparent pricing and guaranteed satisfaction. Easy multi-step booking process." />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fservicehub9521back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-surface shadow-craftsman sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-10 w-10 text-primary" viewBox="0 0 40 40" fill="currentColor">
+                            <path d="M20 2L4 8v12c0 11 7.6 21.3 16 24 8.4-2.7 16-13 16-24V8L20 2zm0 6l12 4.5v9.5c0 8.8-6.1 17.1-12 19.4-5.9-2.3-12-10.6-12-19.4V12.5L20 8z"/>
+                            <path d="M15 18l3 3 7-7-1.4-1.4L18 18.2l-1.6-1.6L15 18z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-primary">ServiceHub</h1>
+                        <p class="text-xs text-text-secondary">Trusted Home Services</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="homepage.html" class="nav-link">Home</a>
+                        <a href="service_booking_flow.html" class="nav-link-active">Book Service</a>
+                        <a href="community_reviews.html" class="nav-link">Reviews</a>
+                        <a href="trust_safety_center.html" class="nav-link">Trust & Safety</a>
+                        <a href="support_center.html" class="nav-link">Support</a>
+                    </div>
+                </div>
+
+                <!-- User Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="btn-secondary text-sm px-4 py-2">Sign In</button>
+                    <a href="customer_dashboard.html" class="btn-primary text-sm px-4 py-2">Dashboard</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-text-secondary hover:text-primary p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Progress Indicator -->
+    <section class="bg-surface border-b border-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="goBack()" class="flex items-center text-text-secondary hover:text-primary transition-quick">
+                        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2 class="heading-sm">Book Your Service</h2>
+                </div>
+                <div class="text-sm text-text-secondary">
+                    Step <span id="currentStep">1</span> of 6
+                </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="mt-4">
+                <div class="flex items-center">
+                    <div class="flex-1 relative">
+                        <div class="h-2 bg-border rounded-full">
+                            <div id="progressBar" class="h-2 bg-primary rounded-full transition-all duration-300" style="width: 16.67%"></div>
+                        </div>
+                        <div class="absolute top-0 flex justify-between w-full">
+                            <div class="w-4 h-4 bg-primary rounded-full -mt-1 border-2 border-surface"></div>
+                            <div id="step2" class="w-4 h-4 bg-border rounded-full -mt-1 border-2 border-surface"></div>
+                            <div id="step3" class="w-4 h-4 bg-border rounded-full -mt-1 border-2 border-surface"></div>
+                            <div id="step4" class="w-4 h-4 bg-border rounded-full -mt-1 border-2 border-surface"></div>
+                            <div id="step5" class="w-4 h-4 bg-border rounded-full -mt-1 border-2 border-surface"></div>
+                            <div id="step6" class="w-4 h-4 bg-border rounded-full -mt-1 border-2 border-surface"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between text-xs text-text-muted mt-2">
+                    <span>Service</span>
+                    <span>Details</span>
+                    <span>Provider</span>
+                    <span>Schedule</span>
+                    <span>Payment</span>
+                    <span>Confirm</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Step 1: Service Category Selection -->
+        <div id="step1Content" class="booking-step">
+            <div class="text-center mb-8">
+                <h3 class="heading-lg mb-4">What service do you need?</h3>
+                <p class="body-lg text-text-secondary">Select the type of service you're looking for</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- House Cleaning -->
+                <div class="service-category-card" onclick="selectService('cleaning')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="heading-sm mb-2">House Cleaning</h4>
+                            <p class="text-sm text-text-secondary">Regular, deep, move-in/out cleaning</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-accent font-semibold">Starting at $89</div>
+                    <div class="mt-3 text-xs text-text-muted">
+                        Popular: Weekly cleaning, Deep cleaning, Move-out cleaning
+                    </div>
+                </div>
+
+                <!-- Plumbing -->
+                <div class="service-category-card" onclick="selectService('plumbing')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 100 4v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2a2 2 0 100-4V6z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="heading-sm mb-2">Plumbing</h4>
+                            <p class="text-sm text-text-secondary">Repairs, installations, emergencies</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-accent font-semibold">Starting at $125</div>
+                    <div class="mt-3 text-xs text-text-muted">
+                        Popular: Leak repairs, Drain cleaning, Fixture installation
+                    </div>
+                </div>
+
+                <!-- Electrical -->
+                <div class="service-category-card" onclick="selectService('electrical')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="heading-sm mb-2">Electrical</h4>
+                            <p class="text-sm text-text-secondary">Wiring, outlets, smart home setup</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-accent font-semibold">Starting at $150</div>
+                    <div class="mt-3 text-xs text-text-muted">
+                        Popular: Outlet installation, Panel upgrades, Smart switches
+                    </div>
+                </div>
+
+                <!-- HVAC -->
+                <div class="service-category-card" onclick="selectService('hvac')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="heading-sm mb-2">HVAC Services</h4>
+                            <p class="text-sm text-text-secondary">Heating, cooling, maintenance</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-accent font-semibold">Starting at $175</div>
+                    <div class="mt-3 text-xs text-text-muted">
+                        Popular: AC repair, Furnace maintenance, Duct cleaning
+                    </div>
+                </div>
+
+                <!-- Landscaping -->
+                <div class="service-category-card" onclick="selectService('landscaping')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="heading-sm mb-2">Landscaping</h4>
+                            <p class="text-sm text-text-secondary">Lawn care, garden maintenance</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-accent font-semibold">Starting at $95</div>
+                    <div class="mt-3 text-xs text-text-muted">
+                        Popular: Lawn mowing, Tree trimming, Garden design
+                    </div>
+                </div>
+
+                <!-- Handyman -->
+                <div class="service-category-card" onclick="selectService('handyman')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="heading-sm mb-2">Handyman</h4>
+                            <p class="text-sm text-text-secondary">General repairs, assembly, painting</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-accent font-semibold">Starting at $75</div>
+                    <div class="mt-3 text-xs text-text-muted">
+                        Popular: Furniture assembly, Drywall repair, Painting
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Job Details -->
+        <div id="step2Content" class="booking-step hidden">
+            <div class="text-center mb-8">
+                <h3 class="heading-lg mb-4">Tell us about your job</h3>
+                <p class="body-lg text-text-secondary">Provide details so we can match you with the right professional</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto">
+                <div class="card">
+                    <!-- Location -->
+                    <div class="mb-6">
+                        <label class="form-label">Service Location</label>
+                        <div class="relative">
+                            <input type="text" class="form-input pl-10" placeholder="Enter your address" value="123 Main St, New York, NY 10001" />
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Service-specific fields (will be populated by JavaScript) -->
+                    <div id="serviceSpecificFields">
+                        <!-- Dynamic content based on selected service -->
+                    </div>
+
+                    <!-- Job Description -->
+                    <div class="mb-6">
+                        <label class="form-label">Describe your job</label>
+                        <textarea class="form-input h-32 resize-none" placeholder="Please provide details about what you need done..."></textarea>
+                        <p class="text-sm text-text-muted mt-2">Be specific about your needs to get accurate quotes</p>
+                    </div>
+
+                    <!-- Photo Upload -->
+                    <div class="mb-6">
+                        <label class="form-label">Photos (Optional)</label>
+                        <div class="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-quick cursor-pointer">
+                            <svg class="h-12 w-12 text-text-muted mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            <p class="text-text-secondary mb-2">Upload photos to help professionals understand your job</p>
+                            <p class="text-sm text-text-muted">PNG, JPG up to 10MB each</p>
+                        </div>
+                    </div>
+
+                    <!-- Urgency -->
+                    <div class="mb-6">
+                        <label class="form-label">When do you need this done?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="asap" class="sr-only" />
+                                <div class="urgency-card">
+                                    <div class="text-center">
+                                        <div class="text-error font-semibold mb-1">ASAP</div>
+                                        <div class="text-sm text-text-secondary">Emergency service</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="within-week" class="sr-only" checked />
+                                <div class="urgency-card">
+                                    <div class="text-center">
+                                        <div class="text-warning font-semibold mb-1">This Week</div>
+                                        <div class="text-sm text-text-secondary">Within 7 days</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="flexible" class="sr-only" />
+                                <div class="urgency-card">
+                                    <div class="text-center">
+                                        <div class="text-success font-semibold mb-1">Flexible</div>
+                                        <div class="text-sm text-text-secondary">Best price</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Provider Matching -->
+        <div id="step3Content" class="booking-step hidden">
+            <div class="text-center mb-8">
+                <h3 class="heading-lg mb-4">Available Professionals</h3>
+                <p class="body-lg text-text-secondary">Choose from verified professionals in your area</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="mb-6 flex flex-wrap gap-4 items-center">
+                <div class="flex items-center space-x-2">
+                    <svg class="h-5 w-5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-text-primary">Filter by:</span>
+                </div>
+                <select class="form-input w-auto text-sm">
+                    <option>Availability</option>
+                    <option>Today</option>
+                    <option>This Week</option>
+                    <option>Next Week</option>
+                </select>
+                <select class="form-input w-auto text-sm">
+                    <option>Rating</option>
+                    <option>4.5+ Stars</option>
+                    <option>4.0+ Stars</option>
+                    <option>3.5+ Stars</option>
+                </select>
+                <select class="form-input w-auto text-sm">
+                    <option>Price Range</option>
+                    <option>$50-100</option>
+                    <option>$100-200</option>
+                    <option>$200+</option>
+                </select>
+                <button class="text-sm text-primary hover:text-primary-700 font-medium">Reset Filters</button>
+            </div>
+
+            <!-- Provider Cards -->
+            <div class="space-y-6">
+                <!-- Provider 1 -->
+                <div class="provider-card" onclick="selectProvider('mike-rodriguez')">
+                    <div class="flex items-start space-x-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mike Rodriguez" class="w-20 h-20 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400'; this.onerror=null;" />
+                        <div class="flex-1">
+                            <div class="flex items-start justify-between mb-2">
+                                <div>
+                                    <h4 class="heading-sm">Mike Rodriguez</h4>
+                                    <p class="text-sm text-text-secondary">Licensed Plumber • 15+ years experience</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-accent">$125/hr</div>
+                                    <div class="status-success">Available Today</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 mb-3">
+                                <div class="flex items-center">
+                                    <div class="flex text-accent">
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-text-secondary ml-2">4.9 (127 reviews)</span>
+                                </div>
+                                <div class="text-sm text-text-secondary">127 jobs completed</div>
+                                <div class="text-sm text-text-secondary">Responds in ~30 min</div>
+                            </div>
+                            
+                            <p class="text-sm text-text-secondary mb-4">
+                                Specializes in emergency repairs, pipe installations, and water heater services. Licensed and insured with 15+ years of residential plumbing experience.
+                            </p>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="text-xs bg-primary-100 text-primary px-2 py-1 rounded">Emergency Service</span>
+                                    <span class="text-xs bg-success-100 text-success px-2 py-1 rounded">Licensed</span>
+                                    <span class="text-xs bg-accent-100 text-accent px-2 py-1 rounded">Insured</span>
+                                </div>
+                                <button class="btn-primary text-sm px-6 py-2">Select Mike</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Provider 2 -->
+                <div class="provider-card" onclick="selectProvider('sarah-chen')">
+                    <div class="flex items-start space-x-6">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sarah Chen" class="w-20 h-20 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg'; this.onerror=null;" />
+                        <div class="flex-1">
+                            <div class="flex items-start justify-between mb-2">
+                                <div>
+                                    <h4 class="heading-sm">Sarah Chen</h4>
+                                    <p class="text-sm text-text-secondary">House Cleaning Expert • 8+ years experience</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-accent">$89/visit</div>
+                                    <div class="status-success">Available Today</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 mb-3">
+                                <div class="flex items-center">
+                                    <div class="flex text-accent">
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-text-secondary ml-2">5.0 (89 reviews)</span>
+                                </div>
+                                <div class="text-sm text-text-secondary">89 jobs completed</div>
+                                <div class="text-sm text-text-secondary">Responds in ~15 min</div>
+                            </div>
+                            
+                            <p class="text-sm text-text-secondary mb-4">
+                                Professional cleaning service with eco-friendly products. Specializes in deep cleaning, move-in/out, and recurring maintenance cleaning services.
+                            </p>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="text-xs bg-success-100 text-success px-2 py-1 rounded">Eco-Friendly</span>
+                                    <span class="text-xs bg-primary-100 text-primary px-2 py-1 rounded">Background Checked</span>
+                                    <span class="text-xs bg-accent-100 text-accent px-2 py-1 rounded">Insured</span>
+                                </div>
+                                <button class="btn-primary text-sm px-6 py-2">Select Sarah</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Provider 3 -->
+                <div class="provider-card" onclick="selectProvider('david-thompson')">
+                    <div class="flex items-start space-x-6">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="David Thompson" class="w-20 h-20 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2016/11/29/09/38/adult-1868750_1280.jpg'; this.onerror=null;" />
+                        <div class="flex-1">
+                            <div class="flex items-start justify-between mb-2">
+                                <div>
+                                    <h4 class="heading-sm">David Thompson</h4>
+                                    <p class="text-sm text-text-secondary">Master Electrician • 20+ years experience</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-accent">$150/hr</div>
+                                    <div class="bg-warning-50 text-warning-600 px-3 py-1 rounded-full text-sm font-medium">Tomorrow</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 mb-3">
+                                <div class="flex items-center">
+                                    <div class="flex text-accent">
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <svg class="h-4 w-4 text-gray-300 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-text-secondary ml-2">4.8 (156 reviews)</span>
+                                </div>
+                                <div class="text-sm text-text-secondary">156 jobs completed</div>
+                                <div class="text-sm text-text-secondary">Responds in ~45 min</div>
+                            </div>
+                            
+                            <p class="text-sm text-text-secondary mb-4">
+                                Licensed master electrician with 20+ years experience. Smart home installations, panel upgrades, and emergency electrical repairs.
+                            </p>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="text-xs bg-primary-100 text-primary px-2 py-1 rounded">Master Licensed</span>
+                                    <span class="text-xs bg-accent-100 text-accent px-2 py-1 rounded">Smart Home Expert</span>
+                                    <span class="text-xs bg-success-100 text-success px-2 py-1 rounded">Insured</span>
+                                </div>
+                                <button class="btn-primary text-sm px-6 py-2">Select David</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Scheduling -->
+        <div id="step4Content" class="booking-step hidden">
+            <div class="text-center mb-8">
+                <h3 class="heading-lg mb-4">Schedule Your Service</h3>
+                <p class="body-lg text-text-secondary">Choose a convenient time for your service</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Calendar -->
+                <div class="card">
+                    <h4 class="heading-sm mb-4">Select Date</h4>
+                    <div class="calendar-grid">
+                        <div class="grid grid-cols-7 gap-1 mb-4">
+                            <div class="text-center text-sm font-medium text-text-secondary py-2">Sun</div>
+                            <div class="text-center text-sm font-medium text-text-secondary py-2">Mon</div>
+                            <div class="text-center text-sm font-medium text-text-secondary py-2">Tue</div>
+                            <div class="text-center text-sm font-medium text-text-secondary py-2">Wed</div>
+                            <div class="text-center text-sm font-medium text-text-secondary py-2">Thu</div>
+                            <div class="text-center text-sm font-medium text-text-secondary py-2">Fri</div>
+                            <div class="text-center text-sm font-medium text-text-secondary py-2">Sat</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1">
+                            <!-- Calendar days -->
+                            <div class="calendar-day unavailable">26</div>
+                            <div class="calendar-day unavailable">27</div>
+                            <div class="calendar-day selected">28</div>
+                            <div class="calendar-day available">29</div>
+                            <div class="calendar-day available">30</div>
+                            <div class="calendar-day available">31</div>
+                            <div class="calendar-day available">1</div>
+                            <div class="calendar-day available">2</div>
+                            <div class="calendar-day available">3</div>
+                            <div class="calendar-day available">4</div>
+                            <div class="calendar-day available">5</div>
+                            <div class="calendar-day available">6</div>
+                            <div class="calendar-day available">7</div>
+                            <div class="calendar-day available">8</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-text-muted">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-primary rounded-full"></div>
+                                <span>Selected</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-success rounded-full"></div>
+                                <span>Available</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                <span>Unavailable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Slots -->
+                <div class="card">
+                    <h4 class="heading-sm mb-4">Available Times - July 28</h4>
+                    <div class="space-y-3">
+                        <div class="time-slot-group">
+                            <h5 class="text-sm font-medium text-text-secondary mb-2">Morning</h5>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="time-slot">8:00 AM</button>
+                                <button class="time-slot">9:00 AM</button>
+                                <button class="time-slot selected">10:00 AM</button>
+                                <button class="time-slot">11:00 AM</button>
+                            </div>
+                        </div>
+                        <div class="time-slot-group">
+                            <h5 class="text-sm font-medium text-text-secondary mb-2">Afternoon</h5>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="time-slot">1:00 PM</button>
+                                <button class="time-slot">2:00 PM</button>
+                                <button class="time-slot">3:00 PM</button>
+                                <button class="time-slot">4:00 PM</button>
+                            </div>
+                        </div>
+                        <div class="time-slot-group">
+                            <h5 class="text-sm font-medium text-text-secondary mb-2">Evening</h5>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="time-slot unavailable">5:00 PM</button>
+                                <button class="time-slot unavailable">6:00 PM</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service Duration -->
+                    <div class="mt-6 p-4 bg-primary-50 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-text-primary">Estimated Duration</div>
+                                <div class="text-xs text-text-secondary">Based on job description</div>
+                            </div>
+                            <div class="text-lg font-bold text-primary">2-3 hours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Payment Setup -->
+        <div id="step5Content" class="booking-step hidden">
+            <div class="text-center mb-8">
+                <h3 class="heading-lg mb-4">Payment & Protection</h3>
+                <p class="body-lg text-text-secondary">Secure payment with comprehensive protection</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Payment Methods -->
+                <div class="card">
+                    <h4 class="heading-sm mb-4">Payment Method</h4>
+                    <div class="space-y-4">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" class="sr-only" checked />
+                            <div class="payment-card">
+                                <div class="flex items-center space-x-3">
+                                    <svg class="h-6 w-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
+                                    </svg>
+                                    <div>
+                                        <div class="font-medium">Credit/Debit Card</div>
+                                        <div class="text-sm text-text-secondary">Visa, Mastercard, American Express</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="paypal" class="sr-only" />
+                            <div class="payment-card">
+                                <div class="flex items-center space-x-3">
+                                    <svg class="h-6 w-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
+                                    </svg>
+                                    <div>
+                                        <div class="font-medium">PayPal</div>
+                                        <div class="text-sm text-text-secondary">Pay with your PayPal account</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="apple" class="sr-only" />
+                            <div class="payment-card">
+                                <div class="flex items-center space-x-3">
+                                    <svg class="h-6 w-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 2L3 7v11a1 1 0 001 1h12a1 1 0 001-1V7l-7-5zM9 18H5v-6h4v6zm6 0h-4v-6h4v6z"/>
+                                    </svg>
+                                    <div>
+                                        <div class="font-medium">Apple Pay</div>
+                                        <div class="text-sm text-text-secondary">Touch ID or Face ID</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Card Details Form -->
+                    <div id="cardForm" class="mt-6 space-y-4">
+                        <div>
+                            <label class="form-label">Card Number</label>
+                            <input type="text" class="form-input" placeholder="1234 5678 9012 3456" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="form-label">Expiry Date</label>
+                                <input type="text" class="form-input" placeholder="MM/YY" />
+                            </div>
+                            <div>
+                                <label class="form-label">CVV</label>
+                                <input type="text" class="form-input" placeholder="123" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Cardholder Name</label>
+                            <input type="text" class="form-input" placeholder="John Doe" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Protection & Pricing -->
+                <div class="space-y-6">
+                    <!-- Escrow Service -->
+                    <div class="card">
+                        <div class="flex items-start space-x-3">
+                            <svg class="h-6 w-6 text-success mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-text-primary mb-2">Secure Escrow Service</h4>
+                                <p class="text-sm text-text-secondary">
+                                    Your payment is held securely until the job is completed to your satisfaction. 
+                                    The professional only gets paid after you approve the work.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Damage Protection -->
+                    <div class="card">
+                        <div class="flex items-start space-x-3">
+                            <svg class="h-6 w-6 text-primary mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-text-primary mb-2">Damage Protection</h4>
+                                <p class="text-sm text-text-secondary">
+                                    Up to $1M coverage for any accidental damage during service. 
+                                    All professionals are fully insured and bonded.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Breakdown -->
+                    <div class="card">
+                        <h4 class="heading-sm mb-4">Pricing Breakdown</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-text-secondary">Service Fee (2-3 hours)</span>
+                                <span class="font-medium">$250.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-text-secondary">Platform Fee</span>
+                                <span class="font-medium">$12.50</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-text-secondary">Damage Protection</span>
+                                <span class="font-medium text-success">Included</span>
+                            </div>
+                            <div class="border-t border-border pt-3">
+                                <div class="flex justify-between">
+                                    <span class="font-semibold text-text-primary">Total</span>
+                                    <span class="font-bold text-lg text-primary">$262.50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6: Confirmation -->
+        <div id="step6Content" class="booking-step hidden">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="h-8 w-8 text-success" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="heading-lg mb-4">Booking Confirmed!</h3>
+                <p class="body-lg text-text-secondary">Your service has been successfully booked</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto space-y-6">
+                <!-- Booking Summary -->
+                <div class="card">
+                    <h4 class="heading-sm mb-4">Booking Summary</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-text-secondary">Booking ID</span>
+                            <span class="font-medium">#SH-2025-0728-001</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-text-secondary">Service</span>
+                            <span class="font-medium">Plumbing Repair</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-text-secondary">Professional</span>
+                            <span class="font-medium">Mike Rodriguez</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-text-secondary">Date & Time</span>
+                            <span class="font-medium">July 28, 2025 at 10:00 AM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-text-secondary">Location</span>
+                            <span class="font-medium">123 Main St, New York, NY</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-text-secondary">Total Cost</span>
+                            <span class="font-bold text-lg text-primary">$262.50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Provider Contact -->
+                <div class="card">
+                    <h4 class="heading-sm mb-4">Your Professional</h4>
+                    <div class="flex items-center space-x-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mike Rodriguez" class="w-16 h-16 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400'; this.onerror=null;" />
+                        <div class="flex-1">
+                            <h5 class="font-semibold text-text-primary">Mike Rodriguez</h5>
+                            <p class="text-sm text-text-secondary">Licensed Plumber • 4.9 ⭐ (127 reviews)</p>
+                            <div class="flex space-x-4 mt-2">
+                                <a href="tel:+1-555-0123" class="text-primary hover:text-primary-700 text-sm font-medium">
+                                    📞 Call Mike
+                                </a>
+                                <a href="sms:+1-555-0123" class="text-primary hover:text-primary-700 text-sm font-medium">
+                                    💬 Text Mike
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preparation Instructions -->
+                <div class="card">
+                    <h4 class="heading-sm mb-4">Preparation Instructions</h4>
+                    <ul class="space-y-2 text-sm text-text-secondary">
+                        <li class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-primary mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Clear access to the work area (kitchen sink and surrounding cabinets)</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-primary mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Remove items from under the sink</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-primary mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Have towels available for any water cleanup</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-primary mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Be available to discuss the issue and approve the work</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Guarantee -->
+                <div class="card bg-primary-50">
+                    <div class="flex items-start space-x-3">
+                        <svg class="h-6 w-6 text-primary mt-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        <div>
+                            <h4 class="font-semibold text-primary mb-2">ServiceHub Guarantee</h4>
+                            <p class="text-sm text-text-secondary">
+                                If you're not completely satisfied with the service, we'll work with you and the professional to make it right. 
+                                Your payment is protected until you approve the completed work.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="customer_dashboard.html" class="btn-primary flex-1 text-center">
+                        View in Dashboard
+                    </a>
+                    <button class="btn-secondary flex-1">
+                        Share Booking Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between mt-12">
+            <button id="prevBtn" class="btn-secondary" onclick="previousStep()" style="display: none;">
+                Previous
+            </button>
+            <div class="flex-1"></div>
+            <button id="nextBtn" class="btn-primary" onclick="nextStep()">
+                Continue
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-900 text-white py-16 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <svg class="h-8 w-8 text-accent mr-3" viewBox="0 0 40 40" fill="currentColor">
+                            <path d="M20 2L4 8v12c0 11 7.6 21.3 16 24 8.4-2.7 16-13 16-24V8L20 2zm0 6l12 4.5v9.5c0 8.8-6.1 17.1-12 19.4-5.9-2.3-12-10.6-12-19.4V12.5L20 8z"/>
+                            <path d="M15 18l3 3 7-7-1.4-1.4L18 18.2l-1.6-1.6L15 18z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-xl font-bold">ServiceHub</h3>
+                            <p class="text-sm text-gray-300">Trusted Home Services</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Connecting homeowners with verified, trusted professionals for all home service needs.
+                    </p>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="service_booking_flow.html" class="hover:text-accent">House Cleaning</a></li>
+                        <li><a href="service_booking_flow.html" class="hover:text-accent">Plumbing</a></li>
+                        <li><a href="service_booking_flow.html" class="hover:text-accent">Electrical</a></li>
+                        <li><a href="service_booking_flow.html" class="hover:text-accent">HVAC</a></li>
+                        <li><a href="service_booking_flow.html" class="hover:text-accent">Landscaping</a></li>
+                        <li><a href="service_booking_flow.html" class="hover:text-accent">Handyman</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="trust_safety_center.html" class="hover:text-accent">About Us</a></li>
+                        <li><a href="trust_safety_center.html" class="hover:text-accent">Trust & Safety</a></li>
+                        <li><a href="community_reviews.html" class="hover:text-accent">Reviews</a></li>
+                        <li><a href="support_center.html" class="hover:text-accent">Careers</a></li>
+                        <li><a href="support_center.html" class="hover:text-accent">Press</a></li>
+                        <li><a href="support_center.html" class="hover:text-accent">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="support_center.html" class="hover:text-accent">Help Center</a></li>
+                        <li><a href="support_center.html" class="hover:text-accent">Contact Us</a></li>
+                        <li><a href="customer_dashboard.html" class="hover:text-accent">My Account</a></li>
+                        <li><a href="support_center.html" class="hover:text-accent">Privacy Policy</a></li>
+                        <li><a href="support_center.html" class="hover:text-accent">Terms of Service</a></li>
+                        <li><a href="tel:+1-800-SERVICE" class="hover:text-accent">Emergency: (800) SERVICE-1</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-gray-300">© 2025 ServiceHub. All Rights Reserved.</p>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <span class="text-sm text-gray-300">Licensed & Insured</span>
+                    <span class="text-sm text-gray-300">•</span>
+                    <span class="text-sm text-gray-300">BBB Accredited</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .booking-step {
+            display: block;
+        }
+        
+        .booking-step.hidden {
+            display: none;
+        }
+        
+        .service-category-card {
+            @apply card card-interactive border-2 border-transparent hover:border-primary;
+            cursor: pointer;
+            transition: all 300ms ease-out;
+        }
+        
+        .service-category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .service-category-card.selected {
+            @apply border-primary bg-primary-50;
+        }
+        
+        .urgency-option {
+            cursor: pointer;
+        }
+        
+        .urgency-card {
+            @apply p-4 border border-border rounded-lg transition-all duration-200 hover:border-primary hover:bg-primary-50;
+        }
+        
+        .urgency-option input:checked + .urgency-card {
+            @apply border-primary bg-primary-50;
+        }
+        
+        .provider-card {
+            @apply card border-2 border-transparent hover:border-primary;
+            cursor: pointer;
+            transition: all 300ms ease-out;
+        }
+        
+        .provider-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .provider-card.selected {
+            @apply border-primary bg-primary-50;
+        }
+        
+        .calendar-day {
+            @apply w-10 h-10 flex items-center justify-center text-sm rounded-lg cursor-pointer transition-quick;
+        }
+        
+        .calendar-day.available {
+            @apply hover:bg-success-100 text-text-primary;
+        }
+        
+        .calendar-day.selected {
+            @apply bg-primary text-white;
+        }
+        
+        .calendar-day.unavailable {
+            @apply text-text-muted cursor-not-allowed;
+        }
+        
+        .time-slot {
+            @apply px-4 py-2 border border-border rounded-lg text-sm font-medium transition-quick hover:border-primary hover:bg-primary-50;
+        }
+        
+        .time-slot.selected {
+            @apply bg-primary text-white border-primary;
+        }
+        
+        .time-slot.unavailable {
+            @apply text-text-muted cursor-not-allowed opacity-50;
+        }
+        
+        .payment-method {
+            cursor: pointer;
+        }
+        
+        .payment-card {
+            @apply p-4 border border-border rounded-lg transition-all duration-200 hover:border-primary hover:bg-primary-50;
+        }
+        
+        .payment-method input:checked + .payment-card {
+            @apply border-primary bg-primary-50;
+        }
+    </style>
+
+    <script>
+        let currentStep = 1;
+        let selectedService = '';
+        let selectedProvider = '';
+        
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            const percentage = (currentStep / 6) * 100;
+            progressBar.style.width = percentage + '%';
+            
+            // Update step indicators
+            for (let i = 2; i <= 6; i++) {
+                const stepElement = document.getElementById(`step${i}`);
+                if (i <= currentStep) {
+                    stepElement.className = 'w-4 h-4 bg-primary rounded-full -mt-1 border-2 border-surface';
+                } else {
+                    stepElement.className = 'w-4 h-4 bg-border rounded-full -mt-1 border-2 border-surface';
+                }
+            }
+            
+            document.getElementById('currentStep').textContent = currentStep;
+        }
+        
+        function showStep(step) {
+            // Hide all steps
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`step${i}Content`).classList.add('hidden');
+            }
+            
+            // Show current step
+            document.getElementById(`step${step}Content`).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (step === 1) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'block';
+            }
+            
+            if (step === 6) {
+                nextBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'block';
+                nextBtn.textContent = step === 5 ? 'Complete Booking' : 'Continue';
+            }
+            
+            updateProgressBar();
+        }
+        
+        function nextStep() {
+            if (currentStep < 6) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+        
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+        
+        function goBack() {
+            if (currentStep > 1) {
+                previousStep();
+            } else {
+                window.location.href = 'homepage.html';
+            }
+        }
+        
+        function selectService(service) {
+            selectedService = service;
+            
+            // Remove selected class from all cards
+            document.querySelectorAll('.service-category-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Update service-specific fields
+            updateServiceFields(service);
+            
+            // Auto-advance after selection
+            setTimeout(() => {
+                nextStep();
+            }, 500);
+        }
+        
+        function updateServiceFields(service) {
+            const fieldsContainer = document.getElementById('serviceSpecificFields');
+            let fieldsHTML = '';
+            
+            switch(service) {
+                case 'cleaning':
+                    fieldsHTML = `
+                        <div class="mb-6">
+                            <label class="form-label">Home Size</label>
+                            <select class="form-input">
+                                <option>1 Bedroom (500-800 sq ft)</option>
+                                <option>2 Bedroom (800-1200 sq ft)</option>
+                                <option>3 Bedroom (1200-1800 sq ft)</option>
+                                <option>4+ Bedroom (1800+ sq ft)</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label">Cleaning Type</label>
+                            <select class="form-input">
+                                <option>Regular Cleaning</option>
+                                <option>Deep Cleaning</option>
+                                <option>Move-in/Move-out</option>
+                                <option>Post-construction</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label">Frequency</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="frequency" value="one-time" class="text-primary">
+                                    <span class="text-sm">One-time</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="frequency" value="weekly" class="text-primary">
+                                    <span class="text-sm">Weekly</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="frequency" value="biweekly" class="text-primary">
+                                    <span class="text-sm">Bi-weekly</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="frequency" value="monthly" class="text-primary">
+                                    <span class="text-sm">Monthly</span>
+                                </label>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'plumbing':
+                    fieldsHTML = `
+                        <div class="mb-6">
+                            <label class="form-label">Problem Type</label>
+                            <select class="form-input">
+                                <option>Leak Repair</option>
+                                <option>Drain Cleaning</option>
+                                <option>Fixture Installation</option>
+                                <option>Water Heater Issue</option>
+                                <option>Pipe Installation</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label">Location of Issue</label>
+                            <select class="form-input">
+                                <option>Kitchen</option>
+                                <option>Bathroom</option>
+                                <option>Basement</option>
+                                <option>Laundry Room</option>
+                                <option>Multiple Locations</option>
+                            </select>
+                        </div>
+                    `;
+                    break;
+                default:
+                    fieldsHTML = `
+                        <div class="mb-6">
+                            <label class="form-label">Service Details</label>
+                            <select class="form-input">
+                                <option>Standard Service</option>
+                                <option>Emergency Service</option>
+                                <option>Installation</option>
+                                <option>Repair</option>
+                                <option>Maintenance</option>
+                            </select>
+                        </div>
+                    `;
+            }
+            
+            fieldsContainer.innerHTML = fieldsHTML;
+        }
+        
+        function selectProvider(providerId) {
+            selectedProvider = providerId;
+            
+            // Remove selected class from all cards
+            document.querySelectorAll('.provider-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Auto-advance after selection
+            setTimeout(() => {
+                nextStep();
+            }, 500);
+        }
+        
+        // Initialize the booking flow
+        document.addEventListener('DOMContentLoaded', function() {
+            showStep(1);
+        });
+    </script>
+</body>
+</html>
